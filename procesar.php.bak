@@ -1,0 +1,72 @@
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<title>
+Cruz cotizador
+</title>
+</head>
+
+<body>
+<?php
+header("Content-Type: text/html;charset=utf-8");
+$servername = "localhost";
+$username = "root";
+$password = "new14you";
+$dbname = "cruz";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+if (isset($_POST['listado'])) {
+    // Escape any html characters
+#    echo htmlentities($_POST['listado']);
+
+	$lineaAProcesar=explode("\n",$_POST["listado"]);
+	#$cantidad = preg_split("/[\t]/", "$arraytostring");
+#	print_r($cantidad);
+	$largoArray=count($lineaAProcesar);
+
+
+	for($i=0; $i<$largoArray; $i++)
+	{
+		$splitLinea = preg_split("/[\t]/", "$lineaAProcesar[$i]");
+		$cantidad = $splitLinea[0];
+		#echo "$splitLinea[1] ****";
+		#echo "La cantidad es: $cantidad";
+		#echo "<br>";
+		$articulo = strtolower(substr($splitLinea[$i+1], 0, 8));
+		echo "Articulo: $articulo <-----";
+		echo "<br>";
+#		$sql = sprintf('SELECT * FROM productos WHERE productoNombre LIKE "%%%s%%"', str_replace('"', '', $lineaAProcesar[$i]));
+		$sql = sprintf('SELECT * FROM productos WHERE productoNombre LIKE "%%%s%%"', str_replace('"', '', $articulo));
+		$result = $conn->query($sql);
+		$row = $result->fetch_array();
+		#echo $row["productoNombre"];
+		#echo "<br>";
+	#	echo $row["productoPrecio"];
+		$en = strtolower($row["productoNombre"]);
+		#echo $en;
+		#echo "<br>";
+	#	$busqueda = strpos($en, $articulo);
+		#$busqueda = strstr($en, $articulo);	
+		#echo $busqueda;
+		if($en!=""){
+			echo "Articulo encontrado";
+			echo "<br>";
+		}else{
+			echo "Articulo no encontrado";
+			echo "<br>";
+		}
+
+	}
+}
+$conn->close();
+
+
+?>
+</body>
+</html>

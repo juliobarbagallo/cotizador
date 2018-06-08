@@ -1,0 +1,26 @@
+<html>
+<head>
+<title>Cruz cotizador - Presupuestos.
+</title>
+<link rel="stylesheet" href="./css/bootstrap.css">
+</head>
+<body>
+<h3>Cruz cotizador.</h3>
+
+<select onchange='location.href=this.options[this.selectedIndex].value'
+name='elige' size='1'> <option value='#' selected>Menú</option> <option value='./index.php'>Inicio</option> <option value='./descargas.php'>Presupuestos</option> <option value='./agregarespecial.php'>+ Articulo</option></select><br>
+<br>
+<?php
+$dir=opendir("./presupuestos/");
+while($archivo=readdir($dir))
+{
+//echo $archivo;
+if($archivo != "." && $archivo != ".." && substr($archivo,-5)==".html"){
+#echo "<a href=\"".$archivo."\">".$archivo."</a><br/>";
+echo "<a href=\"./presupuestos/".$archivo."\">".$archivo."</a><br/>";
+echo "<br>";
+}
+}
+?> 
+</body>
+</html>

@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>
+Cruz cotizador
+</title>
+</head>
+
+<body>
+<?php
+if (isset($_POST['listado'])) {
+    // Escape any html characters
+#    echo htmlentities($_POST['listado']);
+
+$lineaAProcesar=explode("\n",$_POST["listado"]);
+
+
+#print_r ($text1);
+#echo "$lineaAProcesar[1]";
+
+
+#$cadena = "$text1[0]";
+
+
+$buscar = "$lineaAProcesar[0]";
+
+$busqueda = strpos($cadenaDB, $buscar);
+ 
+if($busqueda !== FALSE){
+    echo "esta";
+}
+
+}
+?>
+</body>
+
+</html>

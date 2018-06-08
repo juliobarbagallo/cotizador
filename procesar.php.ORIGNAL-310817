@@ -1,0 +1,71 @@
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<title>
+Cruz cotizador
+</title>
+</head>
+
+<body>
+<?php
+header("Content-Type: text/html;charset=utf-8");
+$servername = "localhost";
+$username = "root";
+$password = "new14you";
+$dbname = "cruz";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+if (isset($_POST['listado'])) {
+    // Escape any html characters
+#    echo htmlentities($_POST['listado']);
+
+	$lineaAProcesar=explode("\n",$_POST["listado"]);
+
+	$largoArray=count($lineaAProcesar);
+
+	$sql = "SELECT productoNombre, productoPrecio FROM productos";
+	$result = $conn->query($sql);
+	$largobucle=count($result);
+$var='AMOLADORA ANGULAR 9" (230 mm).'; 
+
+
+	echo $largoArray;
+	echo "<br>";
+	for($i=0; $i<$largoArray; $i++)
+	{
+		echo "<br>";
+	$busqueda = 0;	
+		while($row = $result->fetch_assoc()) {
+			echo $row["productoNombre"];
+			echo "<br>";
+		#	echo $lineaAProcesar[$i];
+			echo "<br>";
+			$busqueda = strpos($row["productoNombre"], $lineaAProcesar[$i]);
+	#		$busqueda = strpos($row["productoNombre"], $var);
+			if($busqueda != FALSE){
+				echo "encontrado";
+				echo "<br>";
+			}
+			else {
+				echo "No encontrado";
+				echo "<br>";
+			}
+
+		}
+
+	}	
+
+
+}
+$conn->close();
+
+
+?>
+</body>
+</html>

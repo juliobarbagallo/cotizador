@@ -1,0 +1,29 @@
+
+<html>
+
+<head>
+
+<title>Cruz cotizador.</title>
+
+</head>
+
+<body>
+
+<form method="POST" action="./procesar.php">
+
+<textarea name="listado" rows="40" cols="160"></textarea>
+<br>
+<input type="submit" name="procesar" value="Procesar"/>
+
+
+<input type="reset" value="Cancelar"/>
+<br>
+<a href="./listado.php">Lista articulos.</a>
+<br>
+<a href="./descargas.php">Presupuestos.</a>
+
+</form>
+
+</body>
+
+</html>

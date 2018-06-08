@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>Cotizador - Eliminar multiples presupuesto.</title>
+<meta http-equiv="refresh" content="3; url=./descargas.php" />
+</head>
+<body>
+
+
+
+<?php
+
+$archivos=$_POST[delid];
+//echo gettype($x);
+$borrados=0;
+$archivo = explode(',', $archivos);
+
+foreach($archivo as $delarchivo){
+
+	if(!empty($delarchivo)) {
+		if(unlink($delarchivo)){
+			$borrados = 1;;
+		}
+	}
+}
+if($borrados != 0) {
+	echo "Presupuestos eliminados.";
+}
+
+?>
+</body>
+</html>

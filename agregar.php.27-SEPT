@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>
+Cruz cotizador - Agregar articulo.
+</title>
+</head>
+<body>
+<?php
+
+header("Content-Type: text/html;charset=utf-8");
+$servername = "localhost";
+$username = "root";
+$password = "new14you";
+$dbname = "cruz";
+
+
+// Create connection
+$con = mysqli_connect("localhost", "root", "new14you", "cruz");
+
+// Check connection
+if (mysqli_connect_errno()) {
+	echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
+
+if (isset($_POST['articulo']) && isset($_POST['precio'])) {
+    // Escape any html characters
+
+	#echo htmlentities($_POST['articulo']);
+	#echo $_POST['articulo'];
+	$articulo = $_POST['articulo'];
+	$item = str_replace('-','"',$articulo);
+	$precio = $_POST['precio'];
+
+
+
+/*
+	<form>
+		Agregar articulo.<br>
+		Articulo:<br>
+		<textarea readonly name="articulo" rows="10" cols="100" style="overflow:auto;resize:none"><?php echo $item;?></textarea><br>
+		Precio:
+		<input type="text" name="Precio: ">
+		<input type="submit" value="Agregar articulo al inventario"><br>
+		<a href="javascript:window.close();">Cerrar.</a>
+	</form> 
+
+*/
+
+mysqli_query($con, "INSERT INTO productos (pid,productoNombre,productoPrecio)
+VALUES ('NULL', '$item',  '$precio ')");
+
+}else{
+echo "Error. Verifique que haya ingresado un precio valido.";
+}
+?>
+</body>
+
+</html>

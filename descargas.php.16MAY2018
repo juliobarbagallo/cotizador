@@ -1,0 +1,59 @@
+<html>
+<head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<title>
+Cruz cotizador - Presupuestos.
+</title>
+
+<link rel="stylesheet" href="./css/bootstrap.css">
+</head>
+<body>
+
+<select onchange='location.href=this.options[this.selectedIndex].value'
+name='elige' size='1'> <option value='#' selected>Menú</option> <option value='./index.php'>Inicio</option> <option value='./descargas.php'>Presupuestos</option> <option value='./agregarespecial.php'>+ Articulo</option></select><br>
+
+<?php
+// list from a given folder $folder="test/";
+$folder="./presupuestos/";
+
+$files = glob( $folder."*.*" ); // to avoid hidden files
+
+
+// Sort files by modified time, latest to oldest
+
+
+array_multisort(array_map( 'filemtime', $files ),SORT_NUMERIC,SORT_DESC,$files);
+
+
+// Use SORT_ASC in place of SORT_DESC for oldest to latest
+//array_multisort(array_map( 'filemtime', $files ),SORT_NUMERIC,SORT_ASC,$files);
+
+
+// display the file names
+if(count($files)){
+
+	$cont = count($files);
+	echo "Hay ".$cont. " presupuesto(s) realizado(s).<br>";
+	for( $i=0 ; $i < count($files) ; $i++ ){
+
+
+		//echo(basename($files[$i])." <a href='".$folder.$files[$i]."'>Link to the file</a><br>");
+		//$archivo=(basename($files[$i]));
+		//echo date ("d-m-Y H:i:s.", filemtime($files[$i])) . (basename($files[$i])." <a href='".$folder.$files[$i]."'>Abrir.</a><br>");
+		
+	//	echo date ("d-m-Y H:i:s.", filemtime($files[$i])) . (basename($files[$i])." <a href='".$folder.$files[$i]."'><img src='./imagenes/descarga.jpeg' style='max-width: 30px; max-height: 30px'/></a><br>");
+
+		echo date ("d-m-Y H:i:s.", filemtime($files[$i])) . (basename($files[$i])." <a href='".$files[$i]."'><img src='./imagenes/descarga.jpeg' style='max-width: 30px; max-height: 30px'/></a> | <a href='./eliminarpresupuesto.php?archivo=".$files[$i]."'><img src='./imagenes/delete.png' style='max-width: 30px; max-height: 30px'/></a><br>");
+
+//		.date ("d-m-Y H:i:s.", filemtime($files[$i]));
+		//echo date ("d-m-Y H:i:s.", filemtime($files[$i]));
+
+
+	}
+
+
+}
+
+?>
+
+</body>
